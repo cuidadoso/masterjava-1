@@ -1,6 +1,7 @@
 package ru.javaops.masterjava.xml.util;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.namespace.QName;
@@ -58,5 +59,9 @@ public class XPathProcessor {
         } catch (XPathExpressionException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public NodeList getElementsByName(final String name) {
+        return doc.getElementsByTagName(name);
     }
 }
