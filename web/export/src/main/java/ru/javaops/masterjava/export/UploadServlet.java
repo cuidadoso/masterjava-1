@@ -45,7 +45,7 @@ public class UploadServlet extends HttpServlet {
                     users.forEach(dao::insert);
                 });
 
-                webContext.setVariable("users", users);
+                webContext.setVariable("users", dao.getWithLimit(20));
                 engine.process("result", webContext, resp.getWriter());
             }
         } catch (Exception e) {
