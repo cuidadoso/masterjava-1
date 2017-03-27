@@ -8,7 +8,6 @@ import ru.javaops.masterjava.persist.model.User;
 import ru.javaops.masterjava.persist.model.UserFlag;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,6 +19,7 @@ import java.util.List;
 @RegisterMapperFactory(EntityMapperFactory.class)
 public abstract class UserDao implements AbstractDao {
 
+    @Transaction
     public User insert(User user) {
         if (user.isNew()) {
             int id = insertGeneratedId(user);
@@ -30,6 +30,7 @@ public abstract class UserDao implements AbstractDao {
         return user;
     }
 
+    @Transaction
     public int insertUsers(List<User> users) {
         List<String> fullNames = new ArrayList<>();
         List<String> emails = new ArrayList<>();
