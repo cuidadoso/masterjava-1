@@ -2,6 +2,7 @@ package ru.javaops.masterjava.persist.dao;
 
 import com.bertoncelj.jdbi.entitymapper.EntityMapperFactory;
 import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.customizers.BatchChunkSize;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import ru.javaops.masterjava.persist.model.User;
 import ru.javaops.masterjava.persist.model.UserFlag;
@@ -51,6 +52,7 @@ public abstract class UserDao implements AbstractDao {
 
     @SqlBatch("INSERT INTO users (full_name, email, flag) VALUES (:full_name, :email, CAST(:flag AS user_flag))")
     @GetGeneratedKeys
+    @BatchChunkSize(1000)
     abstract void insertBatch(@Bind("full_name") List<String> fullNames,
                               @Bind("email") List<String> emails,
                               @Bind("flag") List<UserFlag> flags);
