@@ -41,9 +41,8 @@ public class UploadServlet extends HttpServlet {
                 List<User> users = userExport.process(is);
 
                 UserDao dao = DBIProvider.getDao(UserDao.class);
-                DBIProvider.getDBI().useTransaction((conn, status) -> {
-                    users.forEach(dao::insert);
-                });
+                //DBIProvider.getDBI().useTransaction((conn, status) -> users.forEach(dao::insert));
+                DBIProvider.getDBI().useTransaction((conn, status) -> dao.insertUsers(users));
 
                 webContext.setVariable("users", dao.getWithLimit(20));
                 engine.process("result", webContext, resp.getWriter());
