@@ -17,4 +17,9 @@ public class User extends BaseEntity {
         this(fullName, email, flag);
         this.id=id;
     }
+
+    @Override
+    public String getIndex() {
+        return getEmail();
+    }
 }

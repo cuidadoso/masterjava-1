@@ -21,6 +21,8 @@ abstract public class BaseEntity {
         return id == null;
     }
 
+    public abstract String getIndex();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
