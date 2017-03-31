@@ -4,43 +4,41 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import ru.javaops.masterjava.persist.testdata.UserTestData;
-import ru.javaops.masterjava.persist.model.User;
+import ru.javaops.masterjava.persist.model.Group;
+import ru.javaops.masterjava.persist.testdata.GroupTestData;
 
 import java.util.List;
 
-import static ru.javaops.masterjava.persist.testdata.UserTestData.FIST5_USERS;
+import static ru.javaops.masterjava.persist.testdata.GroupTestData.GROUPS;
 
 /**
- * gkislin
- * 27.10.2016
+ * Created by apyreev on 31-Mar-17.
  */
-public class UserDaoTest extends AbstractDaoTest<UserDao> {
-
-    public UserDaoTest() {
-        super(UserDao.class);
+public class GroupDaoTest extends AbstractDaoTest<GroupDao> {
+    public GroupDaoTest() {
+        super(GroupDao.class);
     }
 
     @BeforeClass
     public static void init() throws Exception {
-        UserTestData.init();
+        GroupTestData.init();
     }
 
     @Before
     public void setUp() throws Exception {
-        UserTestData.setUp();
+        GroupTestData.setUp();
     }
 
     @Test
     public void getWithLimit() {
-        List<User> users = dao.getWithLimit(5);
-        Assert.assertEquals(FIST5_USERS, users);
+        List<Group> groups = dao.getWithLimit(5);
+        Assert.assertEquals(GROUPS, groups);
     }
 
     @Test
     public void insertBatch() throws Exception {
         dao.clean();
-        dao.insertBatch(FIST5_USERS, 3);
+        dao.insertBatch(GROUPS, 3);
         Assert.assertEquals(5, dao.getWithLimit(100).size());
     }
 
