@@ -3,6 +3,7 @@ package ru.javaops.masterjava.export;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.thymeleaf.context.WebContext;
+import ru.javaops.masterjava.export.helpers.FailedIndex;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -42,7 +43,7 @@ public class UploadServlet extends HttpServlet {
             } else {
                 Part filePart = req.getPart("fileToUpload");
                 try (InputStream is = filePart.getInputStream()) {
-                    List<UserExport.FailedEmail> failed = userExport.process(is, chunkSize);
+                    List<FailedIndex> failed = userExport.process(is, chunkSize);
                     log.info("Failed users: " + failed);
                     final WebContext webContext =
                             new WebContext(req, resp, req.getServletContext(), req.getLocale(),

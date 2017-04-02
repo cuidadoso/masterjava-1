@@ -27,7 +27,7 @@ public abstract class AbstractDao<T extends BaseEntity> {
 
     abstract int getNextVal();
 
-    abstract int getSeqAndSkip(int step);
+    public abstract int getSeqAndSkip(int step);
 
     public List<String> insertAndGetAlreadyPresent(List<T> entity) {
         int[] result = insertBatch(entity, entity.size());
