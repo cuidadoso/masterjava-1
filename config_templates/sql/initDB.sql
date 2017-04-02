@@ -46,12 +46,16 @@ CREATE UNIQUE INDEX id_name_idx ON cities (id_name);
 /* Groups */
 DROP TABLE IF EXISTS groups;
 DROP SEQUENCE IF EXISTS group_seq;
+DROP TYPE IF EXISTS group_type;
+
+CREATE TYPE group_type AS ENUM ('REGISTERING', 'CURRENT', 'FINISHED');
 
 CREATE SEQUENCE group_seq START 400000;
 
 CREATE TABLE groups (
   id          INTEGER PRIMARY KEY DEFAULT nextval('group_seq'),
   name        TEXT NOT NULL,
+  type        group_type NOT NULL,
   project_id  INTEGER
 );
 
