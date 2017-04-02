@@ -23,8 +23,9 @@ DROP SEQUENCE IF EXISTS project_seq;
 CREATE SEQUENCE project_seq START 200000;
 
 CREATE TABLE projects (
-  id        INTEGER PRIMARY KEY DEFAULT nextval('project_seq'),
-  name      TEXT NOT NULL
+  id          INTEGER PRIMARY KEY DEFAULT nextval('project_seq'),
+  name        TEXT NOT NULL,
+  description TEXT NOT NULL
 );
 
 CREATE UNIQUE INDEX project_idx ON projects (name);

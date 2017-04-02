@@ -18,12 +18,12 @@ public abstract class ProjectDao extends AbstractDao<Project> {
     @Override
     public abstract void clean();
 
-    @SqlUpdate("INSERT INTO projects (name) VALUES (:name)")
+    @SqlUpdate("INSERT INTO projects (name, description) VALUES (:name, :description)")
     @GetGeneratedKeys
     @Override
     abstract int insertGeneratedId(@BindBean Project project);
 
-    @SqlUpdate("INSERT INTO projects (id, name) VALUES (:id, :name)")
+    @SqlUpdate("INSERT INTO projects (id, name, description) VALUES (:id, :name, :description)")
     @Override
     abstract void insertWithId(@BindBean Project project);
 
@@ -32,7 +32,7 @@ public abstract class ProjectDao extends AbstractDao<Project> {
     public abstract List<Project> getWithLimit(@Bind int limit);
 
     //    https://habrahabr.ru/post/264281/
-    @SqlBatch("INSERT INTO projects (id, name) VALUES (:id, :name) ON CONFLICT DO NOTHING")
+    @SqlBatch("INSERT INTO projects (id, name, description) VALUES (:id, :name, :description) ON CONFLICT DO NOTHING")
     @Override
     public abstract int[] insertBatch(@BindBean List<Project> projects, @BatchChunkSize int chunkSize);
 

@@ -16,8 +16,8 @@ public class ProjectTestData {
     public static List<Project> PROJECTS;
 
     public static void init() {
-        TOPJAVA = new Project("topjava");
-        MASTERJAVA = new Project("masterjava");
+        TOPJAVA = new Project("topjava", "Topjava");
+        MASTERJAVA = new Project("masterjava", "Masterjava");
         PROJECTS = ImmutableList.of(MASTERJAVA, TOPJAVA);
     }
 

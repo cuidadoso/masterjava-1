@@ -11,9 +11,10 @@ import lombok.*;
 @NoArgsConstructor
 public class Project extends BaseEntity {
     private @NonNull String name;
+    private @NonNull String description;
 
-    public Project(Integer id, String name) {
-        this(name);
+    public Project(Integer id, String name, String description) {
+        this(name, description);
         this.id = id;
     }
 
