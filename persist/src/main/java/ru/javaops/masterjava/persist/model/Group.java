@@ -12,11 +12,12 @@ import lombok.*;
 @NoArgsConstructor
 public class Group extends BaseEntity {
     private @NonNull String name;
+    private @NonNull GroupType type;
     @Column("project_id")
     private @NonNull Integer projectId;
 
-    public Group(Integer id, String name, Integer projectId) {
-        this(name, projectId);
+    public Group(Integer id, String name, GroupType type, Integer projectId) {
+        this(name, type, projectId);
         this.id = id;
     }
 

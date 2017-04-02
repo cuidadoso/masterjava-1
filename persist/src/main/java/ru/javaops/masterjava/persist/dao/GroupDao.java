@@ -17,12 +17,12 @@ public abstract class GroupDao extends AbstractDao<Group> {
     @Override
     public abstract void clean();
 
-    @SqlUpdate("INSERT INTO groups (name, project_id) VALUES (:name, :projectId)")
+    @SqlUpdate("INSERT INTO groups (name, type, project_id) VALUES (:name, CAST(:type AS GROUP_TYPE), :projectId)")
     @GetGeneratedKeys
     @Override
     abstract int insertGeneratedId(@BindBean Group entity);
 
-    @SqlUpdate("INSERT INTO groups (id, name, project_id) VALUES (:id, :name, :projectId)")
+    @SqlUpdate("INSERT INTO groups (id, name, type, project_id) VALUES (:id, :name, CAST(:type AS GROUP_TYPE), :projectId)")
     @Override
     abstract void insertWithId(@BindBean Group entity);
 
@@ -31,7 +31,8 @@ public abstract class GroupDao extends AbstractDao<Group> {
     public abstract List<Group> getWithLimit(@Bind int limit);
 
     //    https://habrahabr.ru/post/264281/
-    @SqlBatch("INSERT INTO groups (id, name, project_id) VALUES (:id, :name, :projectId) ON CONFLICT DO NOTHING")
+    @SqlBatch("INSERT INTO groups (id, name, type, project_id) VALUES (:id, :name, CAST(:type AS GROUP_TYPE), :projectId) " +
+            "ON CONFLICT DO NOTHING")
     @Override
     public abstract int[] insertBatch(@BindBean List<Group> projects, @BatchChunkSize int chunkSize);
 
