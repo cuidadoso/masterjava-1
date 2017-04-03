@@ -12,6 +12,14 @@
         <label for="chunkSize">Chunk Size:</label>
         <!--/*@thymesVar id="chunkSize" type="java.lang.Integer"*/-->
         <input type="number" name="chunkSize" id="chunkSize" th:value="${chunkSize}"/><br/><br/>
+        <!--/*@thymesVar id="entity" type="java.lang.String"*/-->
+        <select th:type="strings" name="entity" id="entity" th:value="${entity}">
+            <option value="User" th:text="User"></option>
+            <option value="City" th:text="City"></option>
+            <option value="Project" th:text="Project"></option>
+            <option value="Group" th:text="Group"></option>
+        </select>
+        <br/><br/>
         <input type="file" name="fileToUpload" id="fileToUpload"><br/>
     </p>
     <p>

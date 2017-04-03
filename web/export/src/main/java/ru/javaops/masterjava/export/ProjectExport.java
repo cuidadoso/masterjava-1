@@ -44,7 +44,7 @@ public class ProjectExport {
 
                 while (processor.doUntil(XMLEvent.START_ELEMENT, "Project")) {
                     final String name = processor.getAttribute("name");
-                    final String description = processor.getAttribute("description");
+                    final String description = processor.getElementValue("description");
 
                     final Project project = new Project(id++, name, description);
                     chunk.add(project);

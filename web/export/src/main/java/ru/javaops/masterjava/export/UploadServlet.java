@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ru.javaops.masterjava.export.ThymeleafListener.engine;
@@ -24,7 +25,7 @@ import static ru.javaops.masterjava.export.ThymeleafListener.engine;
 public class UploadServlet extends HttpServlet {
     private static final int CHUNK_SIZE = 2000;
 
-    private final UserExport userExport = new UserExport();
+    //private final UserExport userExport = new UserExport();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +44,22 @@ public class UploadServlet extends HttpServlet {
             } else {
                 Part filePart = req.getPart("fileToUpload");
                 try (InputStream is = filePart.getInputStream()) {
-                    List<FailedIndex> failed = userExport.process(is, chunkSize);
+                    String entity = req.getParameter("entity");
+                    List<FailedIndex> failed = new ArrayList<>();
+                    switch (entity) {
+                        case "User":
+                            failed.addAll(new UserExport().process(is, chunkSize));
+                            break;
+                        case "City":
+                            failed.addAll(new CityExport().process(is, chunkSize));
+                            break;
+                        case "Project":
+                            failed.addAll(new ProjectExport().process(is, chunkSize));
+                            break;
+                        case "Group":
+                            failed.addAll(new GroppExport().process(is, chunkSize));
+                            break;
+                    }
                     log.info("Failed users: " + failed);
                     final WebContext webContext =
                             new WebContext(req, resp, req.getServletContext(), req.getLocale(),
