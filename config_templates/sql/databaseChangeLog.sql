@@ -1,6 +1,7 @@
 --liquibase formatted sql
 
 --changeset gkislin:1
+--comment ADD CITY TABLE
 CREATE SEQUENCE common_seq START 100000;
 
 CREATE TABLE city (
@@ -13,6 +14,7 @@ ALTER TABLE users
   ADD COLUMN city_id INTEGER REFERENCES city (id);
 
 --changeset gkislin:2
+--comment ADD PROJECT AND GROUP TABLES
 CREATE TABLE project (
   id          INTEGER PRIMARY KEY DEFAULT nextval('common_seq'),
   name        TEXT NOT NULL UNIQUE,

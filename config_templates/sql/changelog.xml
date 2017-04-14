@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="patch/001_add_common_seq.sql"/>
+    <include file="patch/002_add_city.sql"/>
+    <include file="patch/003_add_columnref_to_user.sql"/>
+    <include file="patch/004_create_table_project.sql"/>
+    <include file="patch/005_create_type_group_type.sql"/>
+    <include file="patch/006_create_table_groups.sql"/>
+    <include file="patch/007_create_table_user_group.sql"/>
+
+</databaseChangeLog>

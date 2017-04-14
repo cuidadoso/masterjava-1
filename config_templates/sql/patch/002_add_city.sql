@@ -1,4 +1,6 @@
-CREATE SEQUENCE common_seq START 100000;
+--liquibase formatted sql
+--changeset alpere:002
+--comment ADD CITY TABLE
 
 CREATE TABLE city (
   id   INTEGER PRIMARY KEY DEFAULT nextval('common_seq'),
@@ -6,5 +8,4 @@ CREATE TABLE city (
   name TEXT NOT NULL
 );
 
-ALTER TABLE users
-  ADD COLUMN city_id INTEGER REFERENCES city (id);
+--rollback DROP TABLE city;
