@@ -1,6 +1,5 @@
 package ru.javaops.masterjava.service.mail;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 import javax.xml.namespace.QName;
@@ -18,8 +17,15 @@ public class MailServiceClient {
         MailService mailService = service.getPort(MailService.class);
         //mailService.sendMail(ImmutableList.of(new Addressee("alexander_s@front.ru")), ImmutableList.of(), "Subject", "Body");
 
-        mailService.sendMail(
+
+        mailService.sendToGroup(ImmutableSet.of(
+                new Addressee("gkislin@javaops.ru"),
+                new Addressee("Bad Email <bad_email.ru>")), ImmutableSet.of(), "Subject", "Body");
+
+
+        mailService.sendToGroup(
                 ImmutableSet.of(new Addressee("Григорий Кислин <gkislin@javaops.ru>")),
                 ImmutableSet.of(new Addressee("Мастер Java <masterjava@javaops.ru>")), "Subject", "Body");
+
     }
 }
