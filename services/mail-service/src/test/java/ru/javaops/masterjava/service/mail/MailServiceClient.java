@@ -18,14 +18,17 @@ public class MailServiceClient {
         //mailService.sendMail(ImmutableList.of(new Addressee("alexander_s@front.ru")), ImmutableList.of(), "Subject", "Body");
 
 
-        mailService.sendToGroup(ImmutableSet.of(
+        ImmutableSet<Addressee> addressees = ImmutableSet.of(
                 new Addressee("gkislin@javaops.ru"),
-                new Addressee("Bad Email <bad_email.ru>")), ImmutableSet.of(), "Subject", "Body");
+                new Addressee("Мастер Java <masterjava@javaops.ru>"),
+                new Addressee("Bad Email <bad_email.ru>"));
 
 
-        mailService.sendToGroup(
-                ImmutableSet.of(new Addressee("Григорий Кислин <gkislin@javaops.ru>")),
-                ImmutableSet.of(new Addressee("Мастер Java <masterjava@javaops.ru>")), "Subject", "Body");
+        String status = mailService.sendToGroup(addressees, ImmutableSet.of(), "Bulk email subject", "Bulk email body");
+        System.out.println(status);
+
+        GroupResult groupResult = mailService.sendBulk(addressees, "Individual mail subject", "Individual mail body");
+        System.out.println(groupResult);
 
     }
 }
